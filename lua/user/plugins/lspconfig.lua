@@ -37,8 +37,11 @@ return {
   ft = { 'lua', 'c', 'cpp' },
   dependencies = {
     'williamboman/mason.nvim',
+    'hrsh7th/cmp-nvim-lsp',
   },
   config = function()
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
     -- Wrapper for on_attach with error handling
     local on_attach_wrapper = function(client, bufnr)
       local _, err = pcall(on_attach, client, bufnr)
@@ -52,6 +55,7 @@ return {
     -- Configure lua_ls
     vim.lsp.config('lua_ls', {
       on_attach = on_attach_wrapper,
+      capabilities = capabilities,
       settings = {
         Lua = {
           workspace = { checkThirdParty = false },
@@ -63,6 +67,7 @@ return {
     -- Configure ccls
     vim.lsp.config('ccls', {
       on_attach = on_attach_wrapper,
+      capabilities = capabilities,
       settings = {
         ccls = {
           compilationDatabaseDirectory = 'build',
