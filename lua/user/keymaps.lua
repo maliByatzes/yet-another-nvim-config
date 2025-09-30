@@ -1,3 +1,7 @@
+-- Remap for dealing with word wrap
+vim.keymap.set('n', 'k', 'v:count == 0 ? \'gk\' : \'k\'', { expr = true, silent = true })
+vim.keymap.set('n', 'j', 'v:count == 0 ? \'gj\' : \'j\'', { expr = true, silent = true })
+
 -- Move window using the <C-hjkl> keys
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Switch to left window' })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Swicth to lower window' })
@@ -44,7 +48,7 @@ vim.keymap.set('n', 'Q', '<nop>')
 vim.keymap.set('n', 'q:', '<nop>')
 
 -- Format file
-vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
+-- vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
 
 -- Beautiful instant search and replace command
 vim.keymap.set('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])

@@ -38,6 +38,7 @@ return {
   dependencies = {
     'williamboman/mason.nvim',
     'hrsh7th/cmp-nvim-lsp',
+    'j-hui/fidget.nvim',
   },
   config = function()
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
