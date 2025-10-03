@@ -1,6 +1,8 @@
 require('user.options')
-require('user.keymaps')
-require('user.autocmds')
+
+local utils = require('user.utils')
+
+utils.lazy_load({ 'user.autocmds', 'user.keymaps' })
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
