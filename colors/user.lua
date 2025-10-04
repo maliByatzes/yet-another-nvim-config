@@ -1,2 +1,2 @@
-package.loaded['user.colors'] = nil
-require('user.colors')()
+--package.loaded['user.colors'] = nil
+--require('user.colors')()
