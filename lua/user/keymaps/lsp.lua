@@ -4,8 +4,6 @@ local map = utils.map
 local augroup = utils.augroup
 
 utils.on_attach(function(client, bufnr)
-  print(client.name .. ' attached to buffer ' .. bufnr)
-
   local opts = { buffer = bufnr }
 
   if
