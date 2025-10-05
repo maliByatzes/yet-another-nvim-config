@@ -109,11 +109,11 @@ return {
 				diagnostics_format = "#{m} (#{s})",
 				sources = {
 					-- cpp
-					null_ls.builtins.diagnostics.cppcheck.with({
-						extra_args = {
-							"--inconclusive",
-						},
-					}),
+					-- null_ls.builtins.diagnostics.cppcheck.with({
+					--	extra_args = {
+					--		"--inconclusive",
+					--	},
+					--}),
 					-- lua
 					null_ls.builtins.diagnostics.selene,
 					null_ls.builtins.formatting.stylua,
