@@ -98,6 +98,8 @@ return {
 		},
 		{
 			"<leader>sH",
+			telescope_builtin("highlights"),
+			desc = "Search highlight groups",
 		},
 		{
 			"<leader>sb",
@@ -109,20 +111,139 @@ return {
 			end,
 			desc = "Find fuzzy match in current buffer",
 		},
+		{
+			"<leader>sk",
+			telescope_builtin("keymaps"),
+			desc = "Key maps",
+		},
+		{
+			"<leader>sM",
+			telescope_builtin("man_pages"),
+			desc = "Man pages",
+		},
+		{
+			"<leader>sm",
+			telescope_builtin("marks"),
+			desc = "Jump to mark",
+		},
+		{
+			"<leader>so",
+			telescope_builtin("vim_options"),
+			desc = "Options",
+		},
+		{
+			"<leader>sw",
+			telescope_builtin("grep_string"),
+			desc = "Word (root dir)",
+		},
+		{
+			"<leader>uC",
+			telescope_builtin("colorscheme", { enable_preview = true }),
+			desc = "Colorscheme with preview",
+		},
+		{
+			"<leader>ss",
+			telescope_builtin("lsp_document_symbols"),
+			desc = "List symbols (current buffer)",
+		},
+		{
+			"<leader>sS",
+			telescope_builtin("lsp_workspace_symbols"),
+			desc = "List symbols (Workspace)",
+		},
+		{
+			"<leader>sr",
+			telescope_builtin("lsp_references"),
+			desc = "List LSP references for word under the cursor",
+		},
+		{
+			"<leader>R",
+			telescope_builtin("resume"),
+			desc = "Resume",
+		},
+		{
+			"<leader>sd",
+			telescope_builtin("diagnostics", { bufnr = 0 }),
+			desc = "Lists diagnostics for the current buffer",
+		},
+		{
+			"<leader>sD",
+			telescope_builtin("diagnostics"),
+			desc = "Lists all diagnostics for all open buffers",
+		},
 	},
 	opts = function()
 		local actions = require("telescope.actions")
 		return {
 			defaults = {
+				prompt_prefix = " ",
+				selection_caret = " ",
 				mappings = {
 					i = {
+						["<C-[>"] = actions.close,
 						["<C-n>"] = actions.cycle_history_next,
 						["<C-p>"] = actions.cycle_history_prev,
 						["<C-j>"] = actions.move_selection_next,
 						["<C-k>"] = actions.move_selection_previous,
+						["<a-i>"] = function()
+							telescope_builtin("find_files", { no_ignore = true })()
+						end,
+						["<a-h>"] = function()
+							telescope_builtin("find_files", { hidden = true })()
+						end,
+						["<C-Down>"] = function(...)
+							return require("telescope.actions").cycle_history_next(...)
+						end,
+						["<C-Up>"] = function(...)
+							return require("telescope.actions").cycle_history_prev(...)
+						end,
+						["<C-f>"] = function(...)
+							return require("telescope.actions").preview_scrolling_down(...)
+						end,
+						["<C-b>"] = function(...)
+							return require("telescope.actions").preview_scrolling_up(...)
+						end,
 					},
-					n = { ["q"] = actions.close },
+					n = {
+						["q"] = function(...)
+							return require("telescope.actions").close(...)
+						end,
+						["<C-[>"] = actions.close,
+					},
 				},
+				vimgrep_arguments = (function()
+					if is_git_repo() then
+						return {
+							"git",
+							"grep",
+							"--full-name",
+							"--line-number",
+							"--column",
+							"--extended-regexp",
+							"--ignore-case",
+							"--no-color",
+							"--recursive",
+							"--recurse-submodules",
+							"-I",
+						}
+					else
+						return {
+							"grep",
+							"--extended-regexp",
+							"--color=never",
+							"--with-filename",
+							"--line-number",
+							"-b", -- grep doesn't support a `--column` option :(
+							"--ignore-case",
+							"--recursive",
+							"--no-messages",
+							"--exclude-dir=*cache*",
+							"--exclude-dir=*.git",
+							"--exclude=.*",
+							"--binary-files=without-match",
+						}
+					end
+				end)(),
 			},
 			extensions = {
 				fzf = {
