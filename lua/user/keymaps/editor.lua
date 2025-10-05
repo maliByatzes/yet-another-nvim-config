@@ -14,7 +14,7 @@ map("n", "<leader>p", [[m`0"_DP``]], opt, "keep pasting overwriting text")
 map("v", "<leader>p", [[m`"_dP``]], opt, "keep pasting over the same thing")
 
 -- delete content w/o messing up with registers
-map({ "n", "v" }, "<leader>d", [["_d]], { remap = false }, "delete content without messing up registers")
+map({ "n", "v" }, "<leader>D", [["_d]], { remap = false }, "delete content without messing up registers")
 
 -- switch CWD to the directory of open buffer
 map({ "n", "v", "o" }, "<leader>cd", "<cmd>cd %:p:h<cr>:pwd<cr>", opt, "switch to cwd")
@@ -169,9 +169,6 @@ map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to prev diagnostic message
 map('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 map('n', 'gl', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 map('n', '<leader>q', vim.diagnostic.setqflist, { desc = 'Open diagnostic quickfix list' })
-
--- Exit keymap
-map('n', '<leader>x', vim.cmd.Ex, { desc = "Exit" })
 
 -- Cursor positions keymaps
 map('n', 'J', 'mzJ`z')

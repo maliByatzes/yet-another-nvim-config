@@ -15,6 +15,7 @@ return {
     wk.add(
       {
         { "<leader><tab>",  group = "tabs" },
+        { "<leader>t",      group = "tabs" },
         { "<leader>b",      group = "buffer/BufferLine" },
         { "<leader>c",      group = "code" },
         { "<leader>d",      group = "debugger" },
@@ -22,12 +23,11 @@ return {
         { "<leader>g",      group = "git" },
         { "<leader>gh",     group = "hunks" },
         { "<leader>h",      group = "gitsigns/hop" },
-        { "<leader>q",      group = "quit/session" },
         { "<leader>s",      group = "search" },
         { "<leader>u",      group = "ui/toggle" },
         { "<leader>r",      group = "refactor" },
         { "<leader>w",      group = "windows" },
-        { "<leader>x",      group = "diagnostics/quickfix" },
+        { "<leader>x",      group = "diagnostics" },
         { "<localleader>u", group = "toggle" },
         { "[",              group = "prev" },
         { "]",              group = "next" },
